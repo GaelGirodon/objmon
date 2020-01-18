@@ -1,0 +1,42 @@
+{
+  "name": "objmon",
+  "version": "0.1.0",
+  "description": "Objectives monitoring dashboard",
+  "main": "app.js",
+  "bin": {
+    "objmon": "./app.js"
+  },
+  "scripts": {
+    "build": "sh ./build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaelGirodon/objmon.git"
+  },
+  "keywords": [
+    "objective",
+    "tracking",
+    "monitoring",
+    "dashboard",
+    "achievement"
+  ],
+  "author": "Gael Girodon <contact@gaelgirodon.fr>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/GaelGirodon/objmon/issues"
+  },
+  "homepage": "https://github.com/GaelGirodon/objmon#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@types/node": "^13.1.8",
+    "axios": "^0.19.1",
+    "milligram": "^1.3.0",
+    "vue": "^2.6.11"
+  },
+  "dependencies": {
+    "chokidar": "^3.3.1",
+    "js-yaml": "^3.13.1",
+    "koa": "^2.11.0",
+    "koa-static": "^5.0.0"
+  }
+}

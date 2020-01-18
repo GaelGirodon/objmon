@@ -1,0 +1,136 @@
+/*
+ * Global
+ */
+
+/* Structure */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.wrapper {
+  padding: 2em;
+  overflow-x: auto;
+}
+/* Vue.js */
+[v-cloak] {
+  display:none;
+}
+/* Action modifier */
+.has-action {
+  cursor: pointer;
+}
+/* Links */
+a {
+  color: inherit;
+  transition: color 0.15s ease;
+}
+a:hover {
+  color: rgb(50, 115, 220)
+}
+
+/*
+ * Table
+ */
+
+.table-container {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+.table-container table {
+  margin: 0;
+}
+table {
+  width: auto;
+  min-width: 100%;
+}
+
+/*
+ * Table cells
+ */
+
+td, th {
+  position: relative;
+  min-width: 64px;
+  padding: 0.75rem 1rem !important;
+  white-space: nowrap;
+  cursor: default;
+  transition: background-color 0.15s ease;
+}
+td:hover, th:hover {
+  background-color: whitesmoke !important;
+}
+th:not(:first-child), td:not(:first-child) {
+  text-align: center;
+}
+th:last-child {
+  min-width: 80px;
+}
+
+/* Input inside table cells */
+th input[type="text"] {
+  background-color: white !important;
+  width: 80%;
+  height: auto;
+  margin: 0;
+  font-size: small;
+}
+
+/* Total */
+thead > tr > th, tbody > tr:last-child > td, tbody > tr:last-child > th {
+  border-width: 0.3rem;
+}
+
+/*
+ * Tooltip
+ */
+
+td .tooltip, th .tooltip {
+  display: none;
+  position: absolute;
+  top: 110%; left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  padding: 4px 8px;
+  background-color: rgba(0,0,0,.8);
+  color: white;
+  font-size: small;
+  font-weight: normal;
+  white-space: initial;
+  z-index: 1000;
+}
+.tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%; left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent rgba(0,0,0,.8) transparent;
+}
+td:hover .tooltip, th:hover .tooltip {
+  display: block;
+}
+
+/*
+ * Progress bar
+ */
+
+.progress .bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 10%;
+  transition: width 1s ease, background-color 1s ease;
+}
+.progress.has-comment::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 8px 0;
+  border-color: transparent #606c76 transparent transparent;
+}
+.no-progress { background: whitesmoke; }

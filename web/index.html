@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objectives monitoring</title>
+
+    <link rel="stylesheet" href="assets/normalize.css">
+    <link rel="stylesheet" href="assets/milligram.min.css">
+    <link rel="stylesheet" href="app.css">
+
+    <script src="assets/fontawesome.min.js" data-observe-mutations></script>
+    <script src="assets/fontawesome.solid.min.js"></script>
+    <script src="assets/axios.min.js"></script>
+    <script src="assets/vue.min.js"></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <main class="wrapper" id="app" v-cloak>
+        <!-- Header -->
+        <header>
+            <h1>{{ title || "Objectives monitoring" }}</h1>
+            <p>{{ subtitle }}</p>
+        </header>
+        <!-- Objective monitoring table -->
+        <div class="table-container">
+            <table>
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>
+                            <!-- Sort by subject name -->
+                            <div class="has-action float-right" @click="toggleSortSubject()">
+                                <span v-show="!sortSubject">
+                                    <i class="fas fa-sort"></i>
+                                </span>
+                                <span v-show="sortSubject == 'asc'">
+                                    <i class="fas fa-sort-down"></i>
+                                </span>
+                                <span v-show="sortSubject == 'desc'">
+                                    <i class="fas fa-sort-up"></i>
+                                </span>
+                            </div>
+                            <!-- Subject filter -->
+                            <input type="text" id="subject" v-model.trim="filterSubject" placeholder="Filter">
+                        </th>
+                        <!-- Objectives -->
+                        <th v-for="o in dynObjectives" class="has-action" @click="showObjectiveLabel = !showObjectiveLabel">
+                            <i :class="'fas fa-' + o.icon" v-show="o.icon"></i>
+                            <span v-if="showObjectiveLabel">{{ o.name }}</span>
+                            <div class="tooltip" v-if="o.description">
+                                <strong v-if="!showObjectiveLabel">{{ o.name }}<br></strong>
+                                {{ o.description }}
+                            </div>
+                        </th>
+                        <th>
+                            <!-- Sort by subject progress value -->
+                            <div class="has-action float-right" @click="toggleSortProgress()">
+                                <span v-show="!sortProgress">
+                                    <i class="fas fa-sort"></i>
+                                </span>
+                                <span v-show="sortProgress == 'asc'">
+                                    <i class="fas fa-sort-down"></i>
+                                </span>
+                                <span v-show="sortProgress == 'desc'">
+                                    <i class="fas fa-sort-up"></i>
+                                </span>
+                            </div>
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                    <!-- Subjects progress -->
+                    <tr v-for="s in dynSubjects">
+                        <th :title="s.id">
+                            <a :href="s.url" v-if="s.url">{{ s.name }}</a>
+                            <span v-else>{{ s.name }}</span>
+                        </th>
+                        <td v-for="o in dynObjectives"
+                            :class="{'has-comment': isTracking(s, o) && s.objectives[o.id].comment, 'progress': isTracking(s, o), 'no-progress': !isTracking(s, o)}"
+                            :style="isTracking(s, o) ? 'background-color: ' + color(s.objectives[o.id].progress, 0.15) : ''">
+                            <span v-if="isTracking(s, o)">{{ s.objectives[o.id].progress }} %</span>
+                            <div class="bar" v-if="isTracking(s, o)"
+                                :style="'width: ' + bar(s.objectives[o.id].progress) + '%; background-color: ' + color(s.objectives[o.id].progress)">
+                            </div>
+                            <div class="tooltip" v-if="isTracking(s, o) && s.objectives[o.id].comment">
+                                {{ s.objectives[o.id].comment }}
+                            </div>
+                        </td>
+                        <th class="progress" :style="'background-color: ' + color(s.progress, 0.15)">
+                            {{ s.progress }} %
+                            <div class="bar"
+                                :style="'width: ' + bar(s.progress) + '%; background-color: ' + color(s.progress)">
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+                <!-- Table footer -->
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <!-- Objectives progress -->
+                        <th class="progress" :style="'background-color: ' + color(o.progress, 0.15)"
+                            v-for="o in dynObjectives">
+                            {{ o.progress }} %
+                            <div class="bar"
+                                :style="'width: ' + bar(o.progress) + '%; background-color: ' + color(o.progress)">
+                            </div>
+                        </th>
+                        <th class="progress" :style="'background-color: ' + color(progress, 0.15)">
+                            {{ progress }} %
+                            <div class="bar" :style="'width: ' + bar(progress) + '%; background-color: ' + color(progress)">
+                            </div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
