@@ -11,7 +11,7 @@ const yaml = require("js-yaml");
 //
 
 // Help message
-const CLI_HELP = `A simple tool to display a dashboard of objectives
+const CLI_HELP = `A simple tool to generate a dashboard of objectives
 from a YAML data file.
 
 Usage:

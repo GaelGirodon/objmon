@@ -3,16 +3,17 @@
 ![Version](https://img.shields.io/github/package-json/v/GaelGirodon/objmon?style=flat-square)
 ![License](https://img.shields.io/github/license/GaelGirodon/objmon?style=flat-square)
 
-A simple tool to display a dashboard of objectives from a YAML data file.
+A simple tool to generate a dashboard of objectives from a YAML data file.
 
-> :construction: Experimental tool :construction:
+> :construction: **Experimental tool** :construction:
 
 ## Install
 
 Install the tool:
 
 ```shell
-npm install GaelGirodon/objmon
+git clone https://github.com/GaelGirodon/objmon.git --depth 1
+cd objmon
 sh build.sh
 npm link
 ```
