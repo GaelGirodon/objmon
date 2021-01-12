@@ -14,7 +14,7 @@ Install the tool:
 ```shell
 git clone https://github.com/GaelGirodon/objmon.git --depth 1
 cd objmon
-sh build.sh
+npm run build
 npm link
 ```
 
