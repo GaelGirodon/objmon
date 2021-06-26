@@ -2,6 +2,7 @@
 # .gitignore
 #
 
+.idea
 node_modules
 web/assets
 *.yml
